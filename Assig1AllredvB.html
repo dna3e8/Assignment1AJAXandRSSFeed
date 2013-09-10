@@ -12,14 +12,26 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
     
-	txt="<table border='1'><tr><th>Title</th><th>Artist</th></tr>";
-	 txt=txt + "<td>&nbsp;</td>";
+	txt="<table border='1'><tr><th>Title</th></tr>";
+	
+	 //txt=txt + "<td>&nbsp;</td>";
 	 
 	x=xmlhttp.responseXML.documentElement.getElementsByTagName("current_observation");
-	txt=txt + "<td>";
+	
 	//xx= x[0].getElementsByTagName("weather");
-	//txt=txt + x.length;
+	//txt=txt + x.nodevalue;
+	txt= txt + x.length;
+	for(i=0;i<x.length;i++)
+	{
+	txt=txt + "<tr>";
+	txt=txt + "<td>";
+	txt=txt+"test";
+	xx=x[i].getElementsByTagName("credit");
+	txt=txt + xx[0].firstChild.nodevalue;
 	txt=txt + "</td>";
+	txt=txt + "</tr>";
+	}
+	
 	document.getElementById("myDiv").innerHTML=txt;
     }
   }
