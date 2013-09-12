@@ -25,14 +25,13 @@ xmlhttp.onreadystatechange=function()
     //document.getElementById("myDiv").innerHTML=x;
 	//alert(x);
 	var info=root.nodeValue
-	var creditTag = root.getElementsByTagName('credit')[0].firstChild.nodeValue;
 	var tempf = root.getElementsByTagName('temp_f')[0].firstChild.nodeValue;
 	var weth = root.getElementsByTagName('weather')[0].firstChild.nodeValue;
 	var credit = root.getElementsByTagName('credit')[0].firstChild.nodeValue;
-	var wind = root.getElementsByTagName('wind')[0].firstChild.nodeValue;
-	var weth = root.getElementsByTagName('weather')[0].firstChild.nodeValue;
+	var wind = root.getElementsByTagName('wind_string')[0].firstChild.nodeValue;
+	var loc = root.getElementsByTagName('location')[0].firstChild.nodeValue;
       //alert(tempF);
-	var txt = "<table border='1'><tr><th>Temp</th><th>Weather</th><th>Credit</th><th>Wind</th></tr>";
+	var txt = "<table border='1'><tr><th>Temp</th><th>Weather</th><th>Credit</th><th>Wind</th><th>Location</th></tr>";
 	txt = txt + "<tr>";
 	txt = txt + "<td>";
 	txt = txt + tempf;
@@ -49,6 +48,10 @@ xmlhttp.onreadystatechange=function()
 
 	txt = txt + "<td>";
 	txt = txt + wind;
+	txt = txt + "</td>";
+
+	txt = txt + "<td>";
+	txt = txt + loc;
 	txt = txt + "</td>";
 
 	txt = txt + "</tr>";
