@@ -5,8 +5,8 @@
 <script>
 function loadXMLDoc()
 {
-var xmlhttp, root;
-var txt, xx, x, i, info,tempf;
+    var xmlhttp;
+//var txt, xx, x, i, info,tempf;
 
 if (window.XMLHttpRequest)
 {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -24,10 +24,14 @@ xmlhttp.onreadystatechange=function()
     
 	txt="<table border='1'><tr><th>Title</th></tr>";
 	
-	x = xmlhttp.responseXML;
-	root = x.documentElement;
-	info = root.nodevalue;
-	tempf = root.getElementsByTagName('temp_f')[0].firstChild.nodevalue;
+	var x = xmlhttp.responseXML
+	var root = x.documentElement;
+	document.getElementById("myDiv").innerHTML = x;
+	alert(x);
+	var info = root.nodeValue
+	var creditTag = root.getElementsByTagName('credit')[0].firstChild.nodeValue;
+	var tempF = root.getElementsByTagName('temp_f')[0].firstChild.nodeValue;
+	//alert(tempF);
 	txt=txt + "<tr>";
 	txt=txt + "<td>";
 	txt=txt+ tempf;
