@@ -3,8 +3,8 @@
 <script>
 function loadXMLDoc()
 {
-var xmlhttp;
-var txt,xx,x,i;
+var xmlhttp, root;
+var txt,xx,x,i,info;
 
 xmlhttp=new XMLHttpRequest();
 xmlhttp.onreadystatechange=function()
@@ -16,18 +16,22 @@ xmlhttp.onreadystatechange=function()
 	
 	 //txt=txt + "<td>&nbsp;</td>";
 	 
-	x=xmlhttp.responseXML.documentElement.getElementsByTagName("current_observation");
+	x = xmlhttp.responseXML;
+	
 	
 	//xx= x[0].getElementsByTagName("weather");
 	//txt=txt + x.nodevalue;
 	txt= txt + x.length;
 	for(i=0;i<x.length;i++)
 	{
+	    root = x.documentElement;
+	    info = root.nodevalue;
+	    tempf= root.getElementsByTagName('temp_f')[0].firstChild.nodevalue;
 	txt=txt + "<tr>";
 	txt=txt + "<td>";
-	txt=txt+"test";
-	xx=x[i].getElementsByTagName("credit");
-	txt=txt + xx[0].firstChild.nodevalue;
+	txt=txt+ tempf;
+	//xx=x[i].getElementsByTagName("credit");
+	//txt=txt + xx[0].firstChild.nodevalue;
 	txt=txt + "</td>";
 	txt=txt + "</tr>";
 	}
