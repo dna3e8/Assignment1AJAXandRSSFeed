@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script> <!-- This is our first JQuery scripts -->
 <script>
 function loadXMLDoc()
 {
 var xmlhttp, root;
-var txt,xx,x,i,info;
+var txt, xx, x, i, info,tempf;
 
-xmlhttp=new XMLHttpRequest();
+if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+
+}
+else {// code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
 xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -14,35 +24,27 @@ xmlhttp.onreadystatechange=function()
     
 	txt="<table border='1'><tr><th>Title</th></tr>";
 	
-	 //txt=txt + "<td>&nbsp;</td>";
-	 
 	x = xmlhttp.responseXML;
-	
-	
-	//xx= x[0].getElementsByTagName("weather");
-	//txt=txt + x.nodevalue;
-	txt= txt + x.length;
-	for(i=0;i<x.length;i++)
-	{
-	    root = x.documentElement;
-	    info = root.nodevalue;
-	    tempf= root.getElementsByTagName('temp_f')[0].firstChild.nodevalue;
+	root = x.documentElement;
+	info = root.nodevalue;
+	tempf = root.getElementsByTagName('temp_f')[0].firstChild.nodevalue;
 	txt=txt + "<tr>";
 	txt=txt + "<td>";
 	txt=txt+ tempf;
-	//xx=x[i].getElementsByTagName("credit");
-	//txt=txt + xx[0].firstChild.nodevalue;
+	
 	txt=txt + "</td>";
 	txt=txt + "</tr>";
-	}
+	
 	
 	document.getElementById("myDiv").innerHTML=txt;
     }
   }
-xmlhttp.open("GET","http://w1.weather.gov/xml/current_obs/KSLC.xml",true);
+xmlhttp.open("GET", "http://w1.weather.gov/xml/current_obs/KSLC.xml", true);
+xmlhttp.setRequestHeader("Content-Type", "text/xml");
 xmlhttp.send();
 }
 </script>
+</head>
 <body>
 
 <div id="myDiv"><h2>Let AJAX change this text</h2></div>
