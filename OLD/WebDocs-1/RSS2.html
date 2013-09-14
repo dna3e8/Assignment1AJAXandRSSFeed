@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+var x;
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+	var x=xmlhttp.responseXML
+	var root = x.documentElement;
+    //document.getElementById("myDiv").innerHTML=x;
+	//alert(x);
+	var info=root.nodeValue
+	var tempf = root.getElementsByTagName('temp_f')[0].firstChild.nodeValue;
+	var weth = root.getElementsByTagName('weather')[0].firstChild.nodeValue;
+	var credit = root.getElementsByTagName('credit')[0].firstChild.nodeValue;
+	var wind = root.getElementsByTagName('wind_string')[0].firstChild.nodeValue;
+	var loc = root.getElementsByTagName('location')[0].firstChild.nodeValue;
+      //alert(tempF);
+	var txt = "<table border='1'><tr><th>Temp</th><th>Weather</th><th>Credit</th><th>Wind</th><th>Location</th></tr>";
+	txt = txt + "<tr>";
+	txt = txt + "<td>";
+	txt = txt + tempf;
+	txt = txt + "</td>";
+
+	txt = txt + "<td>";
+	txt = txt + weth;
+	txt = txt + "</td>";
+	
+
+	txt = txt + "<td>";
+	txt = txt + credit;
+	txt = txt + "</td>";
+
+	txt = txt + "<td>";
+	txt = txt + wind;
+	txt = txt + "</td>";
+
+	txt = txt + "<td>";
+	txt = txt + loc;
+	txt = txt + "</td>";
+
+	txt = txt + "</tr>";
+
+	document.getElementById("myDiv").innerHTML = txt;
+    }
+  }
+
+xmlhttp.open("GET","http://w1.weather.gov/xml/current_obs/KSLC.xml",true);
+xmlhttp.setRequestHeader("Content-Type","text/xml");
+xmlhttp.send();
+}
+
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+
+</body>
+</html>
